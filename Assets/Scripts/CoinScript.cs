@@ -28,4 +28,14 @@ public class CoinScript : MonoBehaviour
         coinValue = v;
         valueText.text = coinValue.ToString();
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerMovement>().IncrementScore(coinValue); //this is the player, we know this because the code wouldn't run otherwise.
+            Destroy(gameObject);
+        }
+        
+    }
 }
