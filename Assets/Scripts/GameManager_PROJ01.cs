@@ -4,35 +4,24 @@ using UnityEngine;
 
 public class GameManager_PROJ01 : MonoBehaviour
 {
-    public GameObject coinPrefab;
-    private float heightValue = 4;
     private float widthValue = 8;
-
-    // Start is called before the first frame update
+    public GameObject[] Items;
     void Start()
     {
-        InvokeRepeating("SpawnCoin", 4, 2);
+        InvokeRepeating("RndItem", 1, 1f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
-    public void SpawnCoin()
+    void RndItem()
     {
         float randomXValue = Random.Range(-widthValue, widthValue);
-        //float randomYValue = Random.Range(-heightValue, heightValue);
 
-        Vector3 pos = new Vector3(randomXValue, 5.5f, 0);
-        GameObject coin = Instantiate(coinPrefab, pos, Quaternion.identity);
-
-        CoinScript_PROJ01 coinScript = coin.GetComponent<CoinScript_PROJ01>();
-
-        int rndValue = Random.Range(0, 3);
-        coinScript.ChangeCoinValue(rndValue);
-        //coinScript.ChangeCoinColor(coinColors[rndValue]);
-
+        Vector3 pos = new Vector3(randomXValue, 8f, 0);
+        var i = Items[Random.Range(0, Items.Length)];
+        Instantiate(i, pos, Quaternion.identity);
     }
 }
